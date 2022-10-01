@@ -1,0 +1,75 @@
+# system modes safety benchmark
+---
+
+safety:
+  ros__parameters:
+    type: system
+    parts:
+      manipulator
+      nav2
+      camera
+      guard
+    modes:
+      __DEFAULT__:
+        manipulator: active.__DEFAULT__
+        nav2: active.__DEFAULT__
+        camera: active.__DEFAULT__
+        guard: active.__DEFAULT__
+      COMPROMISED:
+        manipulator: active.COMPROMISED
+        nav2: active.COMPROMISED
+        camera: inactive.COMPROMISED
+        guard: active.COMPROMISED
+    rules:
+      guard_detect_compomise_in_default:
+        if_target: active.__DEFAULT__
+        if_part: [guard, active.COMPROMISED]
+        new_target: active.COMPROMISED
+      guard_detect_default_in_compromise:
+        if_target: active.COMPROMISED
+        if_part: [guard, active.__DEFAULT__]
+        new_target: active.__DEFAULT__
+
+manipulator:
+  ros__parameters:
+    type: node
+    modes:
+      __DEFAULT__:
+        ros__parameters:
+          max_torque: 0.5
+      COMPROMISED:
+        ros__parameters:
+          max_torque: 0.1
+
+nav2:
+  ros__parameters:
+    type: node
+    modes:
+      __DEFAULT__:
+        ros__parameters:
+          forbidden_areas: false
+      COMPROMISED:
+        ros__parameters:
+          forbidden_areas: true
+
+guard:
+  ros__parameters:
+    type: node
+    modes:
+      __DEFAULT__:
+        ros__parameters:
+          compromised_system: false
+      COMPROMISED:
+        ros__parameters:
+          compromised_system: true
+
+camera:
+  ros__parameters:
+    type: node
+    modes:
+      __DEFAULT__:
+        ros__parameters:
+          use_sim_time: false
+      COMPROMISED:
+        ros__parameters:
+          use_sim_time: false
