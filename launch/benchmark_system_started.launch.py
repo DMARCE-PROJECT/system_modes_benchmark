@@ -87,11 +87,11 @@ def generate_launch_description():
     description.add_action(mode_manager)
     description.add_action(safety)
     description.add_action(safety_configure)
-    description.add_action(on_inactive_handler)
+    # description.add_action(on_inactive_handler)
 
-    description.add_action(nav2)
-    description.add_action(manipulator)
-    description.add_action(camera)
-    description.add_action(guard)
+    # description.add_action(nav2)
+    # description.add_action(manipulator)
+    # description.add_action(camera)
+    # description.add_action(guard)
 
     return description
