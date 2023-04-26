@@ -5,71 +5,211 @@ safety:
   ros__parameters:
     type: system
     parts:
-      manipulator
-      nav2
-      camera
-      guard
+      image_1_to_2
+      imu_1_to_2
+      odom_1_to_2
+      pc2_1_to_2
+      scan_1_to_2
+      tf_1_to_2
+      tf_static_1_to_2
+      twist_2_to_1
     modes:
       __DEFAULT__:
-        manipulator: active.__DEFAULT__
-        nav2: active.__DEFAULT__
-        camera: active.__DEFAULT__
-        guard: active.__DEFAULT__
+        image_1_to_2: active
+        imu_1_to_2: active
+        odom_1_to_2: active
+        pc2_1_to_2: active
+        scan_1_to_2: active
+        tf_1_to_2: active
+        tf_static_1_to_2: active
+        twist_2_to_1: active
+        planner_server: active
+        filter_mask_server: inactive
+        costmap_filter_info_server: inactive
+        filter_mask_server_clean: active
+        costmap_filter_clean: active
+      ALERT:
+        image_1_to_2: inactive
+        imu_1_to_2: active
+        odom_1_to_2: active
+        pc2_1_to_2: active
+        scan_1_to_2: active
+        tf_1_to_2: active
+        tf_static_1_to_2: active
+        twist_2_to_1: active
+        planner_server: active
+        filter_mask_server: active
+        costmap_filter_info_server: active
+        filter_mask_server_clean: inactive
+        costmap_filter_clean: inactive
       COMPROMISED:
-        manipulator: active.COMPROMISED
-        nav2: active.COMPROMISED
-        camera: inactive.COMPROMISED
-        guard: active.COMPROMISED
-    rules:
-      guard_detect_compomise_in_default:
-        if_target: active.__DEFAULT__
-        if_part: [guard, active.COMPROMISED]
-        new_target: active.COMPROMISED
-      guard_detect_default_in_compromise:
-        if_target: active.COMPROMISED
-        if_part: [guard, active.__DEFAULT__]
-        new_target: active.__DEFAULT__
+        image_1_to_2: inactive
+        imu_1_to_2: active
+        odom_1_to_2: active
+        pc2_1_to_2: inactive
+        scan_1_to_2: inactive
+        tf_1_to_2: active
+        tf_static_1_to_2: active
+        twist_2_to_1: inactive
+        planner_server: active
+        filter_mask_server: active
+        costmap_filter_info_server: active
+        filter_mask_server_clean: inactive
+        costmap_filter_clean: inactive
+      HALT:
+        image_1_to_2: inactive
+        imu_1_to_2: inactive
+        odom_1_to_2: inactive
+        pc2_1_to_2: inactive
+        scan_1_to_2: inactive
+        tf_1_to_2: inactive
+        tf_static_1_to_2: inactive
+        twist_2_to_1: inactive
+        planner_server: active
+        filter_mask_server: inactive
+        costmap_filter_info_server: inactive
+        filter_mask_server_clean: inactive
+        costmap_filter_clean: inactive
 
-manipulator:
-  ros__parameters:
-    type: node
-    modes:
-      __DEFAULT__:
-        ros__parameters:
-          max_torque: 0.5
-      COMPROMISED:
-        ros__parameters:
-          max_torque: 0.1
-
-nav2:
-  ros__parameters:
-    type: node
-    modes:
-      __DEFAULT__:
-        ros__parameters:
-          forbidden_areas: false
-      COMPROMISED:
-        ros__parameters:
-          forbidden_areas: true
-
-guard:
-  ros__parameters:
-    type: node
-    modes:
-      __DEFAULT__:
-        ros__parameters:
-          compromised_system: false
-      COMPROMISED:
-        ros__parameters:
-          compromised_system: true
-
-camera:
+image_1_to_2:
   ros__parameters:
     type: node
     modes:
       __DEFAULT__:
         ros__parameters:
           use_sim_time: false
-      COMPROMISED:
+      SOFT:
+        ros__parameters:
+          use_sim_time: false
+      
+imu_1_to_2:
+  ros__parameters:
+    type: node
+    modes:
+      __DEFAULT__:
+        ros__parameters:
+          use_sim_time: false
+      SOFT:
+        ros__parameters:
+          use_sim_time: false
+      
+odom_1_to_2:
+  ros__parameters:
+    type: node
+    modes:
+      __DEFAULT__:
+        ros__parameters:
+          use_sim_time: false
+      SOFT:
+        ros__parameters:
+          use_sim_time: false
+      
+pc2_1_to_2:
+  ros__parameters:
+    type: node
+    modes:
+      __DEFAULT__:
+        ros__parameters:
+          use_sim_time: false
+      SOFT:
+        ros__parameters:
+          use_sim_time: false
+
+scan_1_to_2:
+  ros__parameters:
+    type: node
+    modes:
+      __DEFAULT__:
+        ros__parameters:
+          use_sim_time: false
+      SOFT:
+        ros__parameters:
+          use_sim_time: false
+
+tf_1_to_2:
+  ros__parameters:
+    type: node
+    modes:
+      __DEFAULT__:
+        ros__parameters:
+          use_sim_time: false
+      SOFT:
+        ros__parameters:
+          use_sim_time: false
+
+tf_static_1_to_2:
+  ros__parameters:
+    type: node
+    modes:
+      __DEFAULT__:
+        ros__parameters:
+          use_sim_time: false
+      SOFT:
+        ros__parameters:
+          use_sim_time: false
+
+twist_2_to_1:
+  ros__parameters:
+    type: node
+    modes:
+      __DEFAULT__:
+        ros__parameters:
+          use_sim_time: false
+      SOFT:
+        ros__parameters:
+          use_sim_time: false
+
+planner_server:
+  ros__parameters:
+    type: node
+    modes:
+      __DEFAULT__:
+        ros__parameters:
+          use_sim_time: false
+      SOFT:
+        ros__parameters:
+          use_sim_time: false
+
+filter_mask_server:
+  ros__parameters:
+    type: node
+    modes:
+      __DEFAULT__:
+        ros__parameters:
+          use_sim_time: false
+      SOFT:
+        ros__parameters:
+          use_sim_time: false
+
+costmap_filter_info_server:
+  ros__parameters:
+    type: node
+    modes:
+      __DEFAULT__:
+        ros__parameters:
+          use_sim_time: false
+      SOFT:
+        ros__parameters:
+          use_sim_time: false
+
+costmap_filter_clean:
+  ros__parameters:
+    type: node
+    modes:
+      __DEFAULT__:
+        ros__parameters:
+          use_sim_time: false
+      SOFT:
+        ros__parameters:
+          use_sim_time: false
+
+filter_mask_server_clean:
+  ros__parameters:
+    type: node
+    modes:
+      __DEFAULT__:
+        ros__parameters:
+          use_sim_time: false
+      SOFT:
         ros__parameters:
           use_sim_time: false
