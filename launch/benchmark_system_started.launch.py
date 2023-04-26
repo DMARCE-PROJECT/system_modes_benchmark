@@ -80,13 +80,19 @@ def generate_launch_description():
     on_inactive_handler = launch.actions.RegisterEventHandler(
         launch_system_modes.event_handlers.OnStateTransition(
             target_system_part=safety,
-            goal_state='inactive',
+            goal_state='active',
             entities=[safety_activate]))
+
+    actuation_change_mode_to_DEFAULT = launch.actions.EmitEvent(
+        event=launch_system_modes.events.ChangeMode(
+            system_part_matcher=launch.events.matchers.matches_action(safety),
+            mode_name='__DEFAULT__',
+        ))
 
     description = launch.LaunchDescription()
     description.add_action(mode_manager)
     description.add_action(safety)
-    description.add_action(safety_configure)
+    description.add_action(actuation_change_mode_to_DEFAULT)
     # description.add_action(on_inactive_handler)
 
     # description.add_action(nav2)

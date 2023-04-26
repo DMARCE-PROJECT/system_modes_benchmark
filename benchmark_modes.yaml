@@ -23,6 +23,11 @@ safety:
         tf_1_to_2: active
         tf_static_1_to_2: active
         twist_2_to_1: active
+        planner_server: active
+        filter_mask_server: inactive
+        costmap_filter_info_server: inactive
+        filter_mask_server_clean: active
+        costmap_filter_clean: active
       ALERT:
         image_1_to_2: inactive
         imu_1_to_2: active
@@ -32,6 +37,11 @@ safety:
         tf_1_to_2: active
         tf_static_1_to_2: active
         twist_2_to_1: active
+        planner_server: active
+        filter_mask_server: active
+        costmap_filter_info_server: active
+        filter_mask_server_clean: inactive
+        costmap_filter_clean: inactive
       COMPROMISED:
         image_1_to_2: inactive
         imu_1_to_2: active
@@ -41,6 +51,11 @@ safety:
         tf_1_to_2: active
         tf_static_1_to_2: active
         twist_2_to_1: inactive
+        planner_server: active
+        filter_mask_server: active
+        costmap_filter_info_server: active
+        filter_mask_server_clean: inactive
+        costmap_filter_clean: inactive
       HALT:
         image_1_to_2: inactive
         imu_1_to_2: inactive
@@ -50,6 +65,11 @@ safety:
         tf_1_to_2: inactive
         tf_static_1_to_2: inactive
         twist_2_to_1: inactive
+        planner_server: active
+        filter_mask_server: inactive
+        costmap_filter_info_server: inactive
+        filter_mask_server_clean: inactive
+        costmap_filter_clean: inactive
 
 image_1_to_2:
   ros__parameters:
@@ -62,7 +82,6 @@ image_1_to_2:
         ros__parameters:
           use_sim_time: false
       
-
 imu_1_to_2:
   ros__parameters:
     type: node
@@ -74,7 +93,6 @@ imu_1_to_2:
         ros__parameters:
           use_sim_time: false
       
-
 odom_1_to_2:
   ros__parameters:
     type: node
@@ -86,7 +104,6 @@ odom_1_to_2:
         ros__parameters:
           use_sim_time: false
       
-
 pc2_1_to_2:
   ros__parameters:
     type: node
@@ -97,7 +114,6 @@ pc2_1_to_2:
       SOFT:
         ros__parameters:
           use_sim_time: false
-      
 
 scan_1_to_2:
   ros__parameters:
@@ -109,7 +125,6 @@ scan_1_to_2:
       SOFT:
         ros__parameters:
           use_sim_time: false
-      
 
 tf_1_to_2:
   ros__parameters:
@@ -121,7 +136,6 @@ tf_1_to_2:
       SOFT:
         ros__parameters:
           use_sim_time: false
-      
 
 tf_static_1_to_2:
   ros__parameters:
@@ -133,7 +147,6 @@ tf_static_1_to_2:
       SOFT:
         ros__parameters:
           use_sim_time: false
-      
 
 twist_2_to_1:
   ros__parameters:
@@ -145,4 +158,58 @@ twist_2_to_1:
       SOFT:
         ros__parameters:
           use_sim_time: false
-      
+
+planner_server:
+  ros__parameters:
+    type: node
+    modes:
+      __DEFAULT__:
+        ros__parameters:
+          use_sim_time: false
+      SOFT:
+        ros__parameters:
+          use_sim_time: false
+
+filter_mask_server:
+  ros__parameters:
+    type: node
+    modes:
+      __DEFAULT__:
+        ros__parameters:
+          use_sim_time: false
+      SOFT:
+        ros__parameters:
+          use_sim_time: false
+
+costmap_filter_info_server:
+  ros__parameters:
+    type: node
+    modes:
+      __DEFAULT__:
+        ros__parameters:
+          use_sim_time: false
+      SOFT:
+        ros__parameters:
+          use_sim_time: false
+
+costmap_filter_clean:
+  ros__parameters:
+    type: node
+    modes:
+      __DEFAULT__:
+        ros__parameters:
+          use_sim_time: false
+      SOFT:
+        ros__parameters:
+          use_sim_time: false
+
+filter_mask_server_clean:
+  ros__parameters:
+    type: node
+    modes:
+      __DEFAULT__:
+        ros__parameters:
+          use_sim_time: false
+      SOFT:
+        ros__parameters:
+          use_sim_time: false
